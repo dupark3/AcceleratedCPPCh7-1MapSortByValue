@@ -28,12 +28,12 @@ int main()
         pairs.push_back( std::make_pair(it->first, it->second) );
     }
 
-    // sort the vector by the second element
+    // sort the vector by the second element using a predicate function
     std::sort(pairs.begin(), pairs.end(), compare);
 
-    // write the words and associated counts
-    for (std::map<std::string, int>::const_iterator it = counters.begin();
-         it != counters.end(); ++it){
+    // write the words and associated count, by increasing number of counts
+    for (std::vector< std::pair<std::string, int> >::const_iterator it = pairs.begin();
+         it != pairs.end(); ++it){
         std::cout << it->first << "\t" << it->second << std::endl;
     }
 
