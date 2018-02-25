@@ -1,8 +1,16 @@
-// #include <algorithm> // sort
+#include <algorithm> // sort
 #include <iostream>
 #include <map>
 #include <string>
-// #include <utility> // pair
+#include <vector>
+#include <utility> // pair, make_pair
+
+typedef std::map<std::string, int>::const_iterator map_iter;
+
+
+bool compare (std::pair<std::string, int> x, std::pair<std::string, int> y){
+    return x.second < y.second;
+}
 
 int main()
 {
@@ -12,6 +20,16 @@ int main()
     // read the input, keeping track of each word and how often we see it
     while (std::cin >> s)
         ++counters[s];
+
+    std::vector< std::pair<std::string, int> > pairs;
+
+    // dump map into a vector<pair<string, int>>
+    for (map_iter it = counters.begin(); it != counters.end(); ++it){
+        pairs.push_back( std::make_pair(it->first, it->second) );
+    }
+
+    // sort the vector by the second element
+    std::sort(pairs.begin(), pairs.end(), compare);
 
     // write the words and associated counts
     for (std::map<std::string, int>::const_iterator it = counters.begin();
